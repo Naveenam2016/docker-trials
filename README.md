@@ -1,18 +1,18 @@
 
-### Update resolv.conf
+#### Update resolv.conf
 ```
 echo "nameserver 172.18.20.13" >> /etc/resolv.conf
 echo "nameserver 172.20.100.29" >> /etc/resolv.conf
 echo "nameserver 8.8.8.8" >> /etc/resolv.conf
 ```
 
-### Setting DOCKER_OPTS
+#### Setting DOCKER_OPTS
 ```
 touch /etc/default/docker
 echo 'DOCKER_OPTS="--dns 172.18.20.13 --dns 172.20.100.29 --dns 8.8.8.8"' >> /etc/default/docker
 ```
 
-### Run behind a proxy
+#### Run behind a proxy
 ```
 sudo HTTP_PROXY=http://my-proxy:80/ /usr/bin/docker -d &
 ```
