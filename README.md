@@ -17,3 +17,17 @@ echo 'DOCKER_OPTS="--dns 172.18.20.13 --dns 172.20.100.29 --dns 8.8.8.8"' >> /et
 sudo HTTP_PROXY=http://my-proxy:80/ /usr/bin/docker -d &
 ```
 
+#### Partition information
+'''
+sudo fdisk -l
+sudo sfdisk -l -uM
+cfdisk 
+sudo parted -l
+df -h
+df -h | grep ^/dev
+pydf
+lsblk
+blkid
+hwinfo --block --short
+'''
+
