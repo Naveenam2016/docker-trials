@@ -18,7 +18,7 @@ sudo HTTP_PROXY=http://my-proxy:80/ /usr/bin/docker -d &
 ```
 
 #### Partition information
-'''
+```
 sudo fdisk -l
 sudo sfdisk -l -uM
 cfdisk 
@@ -29,5 +29,5 @@ pydf
 lsblk
 blkid
 hwinfo --block --short
-'''
+```
 
