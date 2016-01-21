@@ -31,3 +31,12 @@ blkid
 hwinfo --block --short
 ```
 
+#### Update linux kernel
+```
+yum list --showduplicates kernel
+on /etc/yum.conf, add exclude=kernel so that the current kernel is not updated
+update the /etc/yum.repos.d/*.repo
+make enabled=1 for the required kernel
+yum update -y
+yum install kernel-<complete-version>
+```
