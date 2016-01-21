@@ -31,7 +31,7 @@ blkid
 hwinfo --block --short
 ```
 
-#### Update linux kernel
+#### Update linux kernel from 3 to 4
 ```
 yum list --showduplicates kernel
 on /etc/yum.conf, add exclude=kernel so that the current kernel is not updated
