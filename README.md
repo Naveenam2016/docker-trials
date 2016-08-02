@@ -30,6 +30,7 @@ EnvironmentFile=/etc/default/docker
 $ vim /lib/systemd/system/docker.service
 ...
 [Service]
+Environment="HTTP_PROXY=http://my-proxy:80/ HTTPS_PROXY=http://my-proxy:80/"
 ExecStart=/usr/bin/docker -d -H fd:// $DOCKER_OPTS
 ...
 EnvironmentFile=-/etc/default/docker
