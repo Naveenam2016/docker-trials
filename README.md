@@ -25,6 +25,19 @@ echo 'DOCKER_OPTS="--dns 172.18.20.13 --dns 172.20.100.29 --dns 8.8.8.8"' >> /et
 #### Run behind a proxy
 ```
 sudo HTTP_PROXY=http://my-proxy:80/ /usr/bin/docker -d &
+
+First, create a directory for drop-in configuration for docker:
+
+mkdir /etc/systemd/system/docker.service.d
+
+Now, create a file called /etc/systemd/system/docker.service.d/http-proxy.conf that adds the environment variable:
+
+[Service]
+Environment=”HTTP_PROXY=http://my-proxy:80″
+
+To apply the change, reload the unit and restart docker:
+systemctl daemon-reload
+systemctl restart docker
 ```
 
 #### Partition information
