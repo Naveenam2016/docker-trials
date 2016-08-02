@@ -45,10 +45,12 @@ $ systemctl restart docker
 
 #### Disable SELinux settings
 ```
-Remove --selinux-enabled from OPTIONS
+$ vi /etc/sysconfig/docker.rpmsave
+
+# Remove --selinux-enabled from OPTIONS
 OPTIONS='--selinux-enabled --log-driver=journald'
 
-uncomment following line
+# uncomment following line
 setsebool -P docker_transition_unconfined
 ```
 
