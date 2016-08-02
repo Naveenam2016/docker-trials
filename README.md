@@ -1,12 +1,3 @@
-#### git prompt
-```
-parse_git_branch() {
-    git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
-}
-
-export PS1="\u@\h [\W]\[\033[32m\]\$(parse_git_branch)\[\033[00m\] $ "
-```
-
 
 
 #### Update resolv.conf
@@ -26,18 +17,24 @@ echo 'DOCKER_OPTS="--dns 172.18.20.13 --dns 172.20.100.29 --dns 8.8.8.8"' >> /et
 ```
 sudo HTTP_PROXY=http://my-proxy:80/ /usr/bin/docker -d &
 
-First, create a directory for drop-in configuration for docker:
-
-mkdir /etc/systemd/system/docker.service.d
-
-Now, create a file called /etc/systemd/system/docker.service.d/http-proxy.conf that adds the environment variable:
-
+$ mkdir /etc/systemd/system/docker.service.d
+$ vim /etc/systemd/system/docker.service.d/http-proxy.conf
 [Service]
 Environment=”HTTP_PROXY=http://my-proxy:80″
+...
+EnvironmentFile=/etc/default/docker
 
-To apply the change, reload the unit and restart docker:
-systemctl daemon-reload
-systemctl restart docker
+$ systemctl daemon-reload
+$ systemctl restart docker
+```
+
+#### Disable SELinux settings
+```
+Remove --selinux-enabled from OPTIONS
+OPTIONS='--selinux-enabled --log-driver=journald'
+
+uncomment following line
+setsebool -P docker_transition_unconfined
 ```
 
 #### Partition information
