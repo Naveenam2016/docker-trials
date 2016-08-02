@@ -15,7 +15,7 @@ echo 'DOCKER_OPTS="--dns 172.18.20.13 --dns 172.20.100.29 --dns 8.8.8.8"' >> /et
 
 #### Run behind a proxy
 ```
-sudo HTTP_PROXY=http://my-proxy:80/ /usr/bin/docker -d &
+sudo HTTP_PROXY=http://my-proxy:80/ /usr/bin/docker -d &  -- obsolete now with 1.12
 
 $ mkdir /etc/systemd/system/docker.service.d
 $ vim /etc/systemd/system/docker.service.d/http-proxy.conf
@@ -24,8 +24,23 @@ Environment=”HTTP_PROXY=http://my-proxy:80″
 ...
 EnvironmentFile=/etc/default/docker
 
+
+***** OR *****
+
+$ vim /lib/systemd/system/docker.service
+...
+[Service]
+ExecStart=/usr/bin/docker -d -H fd:// $DOCKER_OPTS
+...
+EnvironmentFile=-/etc/default/docker
+...
+
+***** FINALLY *****
+
 $ systemctl daemon-reload
 $ systemctl restart docker
+
+
 ```
 
 #### Disable SELinux settings
