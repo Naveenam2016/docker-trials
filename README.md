@@ -80,7 +80,7 @@ yum install kernel-<complete-version>
 ```
 
 #### Mount volume from host with disabling SELinux
-'''
+```
 Temporary solution : su -c "setenforce 0" 
 Permenant soln     : chcon -Rt svirt_sandbox_file_t /path/to/volume
-'''
+```
