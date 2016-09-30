@@ -89,3 +89,20 @@ Permenant soln     : chcon -Rt svirt_sandbox_file_t /path/to/volume
 ```
 ENTRYPOINT service nginx start && bash
 ```
+#### Add /etc/hosts to Dockerfile
+```
+
+Create a writable copy of /etc/hosts somewhere where the path will be the same length. I used /tmp/hosts:
+
+RUN cp /etc/hosts /tmp/hosts
+Then you need to make a copy of libnss_files.so that you can edit:
+
+RUN mkdir -p -- /lib-override && cp /lib/x86_64-linux-gnu/libnss_files.so.2 /lib-override
+Now edit the binary to replace /etc/hosts with the path to the writable hosts file (ex. /tmp/hosts):
+
+RUN perl -pi -e 's:/etc/hosts:/tmp/hosts:g' /lib-override/libnss_files.so.2
+Finish up by letting the system know where to find the edited binary:
+
+ENV LD_LIBRARY_PATH /lib-override
+```
+
